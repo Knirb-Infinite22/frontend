@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+}
+form {
+  border: 2px solid #007bff;
+  padding: 30px;
+  border-radius: 50px;
+}
+/* img {
+  height: 120px;
+  margin-left: 90px;
+  margin-bottom: 10px;
+  display: block;
+  border: 1px solid black;
+  border-radius: 50%;
+} */
+
+input {
+  border-radius: 10px;
+}
+
+.asset-icons {
+  width: 20px;
+  margin-right: 10px;
+}
+.input {
+  box-shadow: (165 165 165 / 50%) 0px 1px 4px;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.token-input-wrapper {
+  display: flex;
+}
+
+.labelsContainer {
+  text-align: left;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.label {
+  font-size: 1rem;
+}
+
+.invalid {
+  border-color: red;
+}
+.App-header {
+  background-color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.connectButton {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.account-data-card {
+  text-align: left;
+}
+
+header {
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
