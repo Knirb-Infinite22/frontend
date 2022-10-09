@@ -65,23 +65,11 @@ function App() {
     e.preventDefault()
     setFrom(e.target.value)
 
-    if (from && from > 0) {
-      fromRef.current.className = 'input valid'
-    } else {
-      fromRef.current.className = 'input invalid'
-    }
-
     validInputs() ? setsubmitBtnDisable(false) : setsubmitBtnDisable(true)
   }
 
   const handleToChange = (e) => {
-    e.preventDefault()
     setTo(e.target.value)
-    if (to && to > 0) {
-      toRef.current.className = 'input valid'
-    } else {
-      toRef.current.className = 'input invalid'
-    }
     validInputs() ? setsubmitBtnDisable(false) : setsubmitBtnDisable(true)
   }
 
@@ -110,8 +98,8 @@ function App() {
       dataAddress.address,
       wethAddress,
       daiAddress,
-      1,
-      10
+      from,
+      to
     )
     if (signedOrderResponse.signedMessage && signedOrderResponse.data) {
       alert('order signed!')
@@ -145,14 +133,12 @@ function App() {
               inputValue={from}
               handleTokenChange={handleFromTokenChange}
               handleInputChange={handleFromChange}
-              ref={toRef}
             />
             <TokenAmountInput
               label='To'
               inputValue={to}
               handleTokenChange={handleToTokenChange}
               handleInputChange={handleToChange}
-              ref={toRef}
             />
             <Button
               type='submit'
