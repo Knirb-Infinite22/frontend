@@ -9,6 +9,7 @@ export const TokenAmountInput = (props) => {
     tokenValue,
     handleTokenChange,
     handleInputChange,
+    fromBalance,
   } = props
 
   const inputRef = useRef()
@@ -48,6 +49,9 @@ export const TokenAmountInput = (props) => {
           }}
         />
       </div>
+      {label === 'FROM' && (
+        <p className='balance-subtext'>balance : {fromBalance}</p>
+      )}
       <br />
     </>
   )

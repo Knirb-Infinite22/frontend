@@ -42,6 +42,16 @@ input {
   font-weight: bold;
 }
 
+.img-logo {
+  border-radius: 10px;
+}
+
+.balance-subtext {
+  text-align: right;
+  font-size: 1rem;
+  font-family: 'Space Grotesk';
+}
+
 .element {
   font-family: 'Space Grotesk';
   font-weight: bold;
@@ -53,6 +63,10 @@ input {
 
 .invalid {
   border-color: red;
+}
+
+.subtitle {
+  font-size: 1rem;
 }
 
 .title {

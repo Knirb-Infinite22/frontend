@@ -28,6 +28,20 @@ export async function signOrder(
 
   await fromContract.approve(accountSignerAddress, inAmount)
 
+  const getRandomInt = (max) => {
+    const randomNumber = Math.floor(Math.random() * max)
+    console.log(`randomNumber: ${randomNumber}`)
+    return randomNumber
+  }
+
+  const getNumber = () => {
+    const param = ethers.BigNumber.from('2')
+      .pow(ethers.BigNumber.from(getRandomInt(0, 256)))
+      .toString()
+    console.log(`param: ${param}`)
+    return param
+  }
+
   const call = {
     functionName: 'tokenToToken',
     paramTypes: [
@@ -43,8 +57,8 @@ export async function signOrder(
       { name: 'data', type: 'bytes', signed: false },
     ],
     params: [
-      '0',
-      '1',
+      0,
+      getNumber(),
       tokenIn,
       tokenOut,
       inAmount,
