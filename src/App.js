@@ -74,7 +74,6 @@ function App() {
       from,
       to
     )
-    console.log({ signedOrderResponse })
     if (signedOrderResponse.signedMessage && signedOrderResponse.data) {
       setShowToast(true)
       sendSignedOrder(signedOrderResponse)
