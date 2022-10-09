@@ -1,22 +1,12 @@
-import { Form, Card } from 'react-bootstrap'
+import { Form } from 'react-bootstrap'
 import { useRef } from 'react'
-
-const tokens = [
-  {
-    name: 'WETH',
-    contractAddress: '0x8B7FB00ABb67ba04CE894B9E2769fe24A8409a6a',
-  },
-  {
-    name: 'DAI',
-    contractAddress: '0xf2edF1c091f683E3fb452497d9a98A49cBA84666',
-  },
-]
+import { tokens } from '../utils/tokens'
 
 export const TokenAmountInput = (props) => {
   const {
     label,
-    // setInput,
     inputValue,
+    defaultTokenValue,
     handleTokenChange,
     handleInputChange,
   } = props
@@ -25,6 +15,7 @@ export const TokenAmountInput = (props) => {
 
   const handleAmountChange = (e) => {
     handleInputChange(e)
+    console.log(`handleAmountChange: ${e.target.value}`)
     if (inputValue && inputValue > 0) {
       inputRef.current.className = 'input valid'
     } else {
@@ -37,9 +28,14 @@ export const TokenAmountInput = (props) => {
       <label className='label'>{label}:</label>
       <br />
       <div className='token-input-wrapper'>
-        <Form.Select onChange={handleTokenChange}>
+        <Form.Select
+          onChange={handleTokenChange}
+          defaultValue={defaultTokenValue}
+        >
           {tokens.map((elem, index) => (
-            <option value={index}>{elem.name}</option>
+            <option key={index} value={index} className='element'>
+              {elem.name}
+            </option>
           ))}
         </Form.Select>
         <input

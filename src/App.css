@@ -2,7 +2,7 @@
   text-align: center;
 }
 form {
-  border: 2px solid #007bff;
+  border: 2px solid #0d6efd;
   padding: 30px;
   border-radius: 50px;
 }
@@ -35,6 +35,7 @@ input {
 
 .labelsContainer {
   text-align: left;
+  font-family: 'Space Grotesk';
 }
 
 .submit-btn {
@@ -45,10 +46,21 @@ input {
 
 .label {
   font-size: 1rem;
+  font-family: 'Space Grotesk';
+  font-weight: bold;
+}
+
+.element {
+  font-family: 'Space Grotesk';
+  font-weight: bold;
 }
 
 .invalid {
   border-color: red;
+}
+
+.title {
+  font-family: 'Space Grotesk';
 }
 .App-header {
   background-color: white;
@@ -65,10 +77,12 @@ input {
   position: absolute;
   right: 20px;
   top: 20px;
+  font-family: 'Space Grotesk';
 }
 
 .account-data-card {
   text-align: left;
+  font-family: 'Space Grotesk';
 }
 
 header {
@@ -77,4 +91,13 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('./static/fonts/SpaceGrotesk-Regular.ttf') format('truetype'),
+    url('./static/fonts/SpaceGrotesk-Bold.ttf') format('truetype'),
+    url('./static/fonts/SpaceGrotesk-Light.ttf') format('truetype'),
+    url('./static/fonts/SpaceGrotesk-Medium.ttf') format('truetype'),
+    url('./static/fonts/SpaceGrotesk-SemiBold.ttf') format('truetype');
 }

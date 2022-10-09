@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap'
 import { ethers } from 'ethers'
 
 export const ConnectButton = (props) => {
-  const { walletData, setwalletData } = props
+  const { walletData, setWalletData } = props
 
   const connectBtnHandler = () => {
     // Asking if metamask is already present or not
@@ -19,7 +19,7 @@ export const ConnectButton = (props) => {
   const setAccountData = async (account) => {
     const balance = await getBalance(account)
 
-    setwalletData({
+    setWalletData({
       address: account,
       balance: balance,
     })

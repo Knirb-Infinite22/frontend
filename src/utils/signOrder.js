@@ -1,3 +1,5 @@
+import { daiAbi } from '../abis/daiAbi'
+
 const { ethers } = require('ethers')
 const brink = require('@brinkninja/sdk')
 const implementationArtifacts = require('./implementation')
@@ -12,13 +14,22 @@ export async function signOrder(
   inAmount,
   outAmount
 ) {
-  // console.log();
-
   const implementation = new ethers.Contract(
     implementationArtifacts.address,
     implementationArtifacts.abi
   )
   const accountSigner = brink.accountSigner(signer, 'goerli')
+
+  await accountSigner.deploy()
+
+  const fromContract = new ethers.Contract(tokenIn, daiAbi, signer)
+
+  const accountSignerAddress = await accountSigner.accountAddress()
+
+  await fromContract.approve(accountSignerAddress, inAmount)
+
+  console.log(`accountSignerAddress: ${accountSignerAddress}`)
+  console.log({ accountSignerAddress })
 
   const call = {
     functionName: 'tokenToToken',
