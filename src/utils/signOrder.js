@@ -20,8 +20,6 @@ export async function signOrder(
     implementationArtifacts.abi
   )
 
-  // const account = brink.account(signerAddress, { provider, signer })
-  // await account.deploy()
   const accountSigner = brink.accountSigner(signer, 'goerli')
 
   const fromContract = new ethers.Contract(tokenIn, daiAbi, signer)
@@ -29,9 +27,6 @@ export async function signOrder(
   const accountSignerAddress = await accountSigner.accountAddress()
 
   await fromContract.approve(accountSignerAddress, inAmount)
-
-  console.log(`accountSignerAddress: ${accountSignerAddress}`)
-  console.log({ accountSignerAddress })
 
   const call = {
     functionName: 'tokenToToken',

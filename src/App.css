@@ -6,14 +6,6 @@ form {
   padding: 30px;
   border-radius: 50px;
 }
-/* img {
-  height: 120px;
-  margin-left: 90px;
-  margin-bottom: 10px;
-  display: block;
-  border: 1px solid black;
-  border-radius: 50%;
-} */
 
 input {
   border-radius: 10px;
@@ -53,6 +45,10 @@ input {
 .element {
   font-family: 'Space Grotesk';
   font-weight: bold;
+}
+
+.select {
+  cursor: pointer;
 }
 
 .invalid {

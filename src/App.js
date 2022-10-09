@@ -1,6 +1,6 @@
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import knirb from './static/knirb.png'
 import { ethers } from 'ethers'
 import { Button, Form, Toast, Table } from 'react-bootstrap'
@@ -25,8 +25,6 @@ function App() {
   const [submitBtnDisable, setsubmitBtnDisable] = useState(true)
 
   const validInputs = () => {
-    console.log(`from validinput: ${from}`)
-
     return from && to && from > 0 && to > 0
   }
 
@@ -44,8 +42,6 @@ function App() {
 
   const handleFromTokenChange = (e) => {
     e.preventDefault()
-
-    console.log(e.target.value)
     setFromToken(e.target.value)
   }
 
@@ -98,14 +94,14 @@ function App() {
             <TokenAmountInput
               label='FROM'
               inputValue={from}
-              defaultTokenValue={fromToken}
+              tokenValue={fromToken}
               handleTokenChange={handleFromTokenChange}
               handleInputChange={handleFromInputChange}
             />
             <TokenAmountInput
               label='TO'
               inputValue={to}
-              defaultTokenValue={toToken}
+              tokenValue={toToken}
               handleTokenChange={handleToTokenChange}
               handleInputChange={handleToInputChange}
             />

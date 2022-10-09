@@ -6,7 +6,7 @@ export const TokenAmountInput = (props) => {
   const {
     label,
     inputValue,
-    defaultTokenValue,
+    tokenValue,
     handleTokenChange,
     handleInputChange,
   } = props
@@ -15,8 +15,6 @@ export const TokenAmountInput = (props) => {
 
   const handleAmountChange = (e) => {
     handleInputChange(e)
-    // console.log(`handleAmountChange: ${e.target.value}`)
-    console.log(`inputValue: ${inputValue}`)
     if (inputValue && inputValue > 0) {
       inputRef.current.className = 'input valid'
     } else {
@@ -31,7 +29,8 @@ export const TokenAmountInput = (props) => {
       <div className='token-input-wrapper'>
         <Form.Select
           onChange={handleTokenChange}
-          defaultValue={defaultTokenValue}
+          defaultValue={tokenValue}
+          className='select'
         >
           {tokens.map((elem, index) => (
             <option key={index} value={index} className='element'>
