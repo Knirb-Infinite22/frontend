@@ -1,18 +1,18 @@
 import { Card } from 'react-bootstrap'
 
-export const WalletInfo = (props) => {
-  const { dataAddress } = props
+export const WalletData = (props) => {
+  const { walletData } = props
 
   return (
     <Card className='account-data-card'>
       <Card.Header>
         <strong>Address: </strong>
-        {dataAddress.address}
+        {walletData.address}
       </Card.Header>
       <Card.Body>
         <Card.Text>
           <strong>Balance: </strong>
-          {dataAddress.balance}
+          {walletData.balance}
         </Card.Text>
       </Card.Body>
     </Card>

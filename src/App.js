@@ -7,55 +7,21 @@ import dai from './static/dai.png'
 import { ethers } from 'ethers'
 import { Button, Form } from 'react-bootstrap'
 import { signOrder } from './utils/signOrder'
-import { WalletInfo } from './components/WalletInfo'
+import { WalletData } from './components/WalletData'
 import { sendSignedOrder } from './services/SignerService'
 import { TokenAmountInput } from './components/TokenAmountInput'
+import { ConnectButton } from './components/ConnectButton'
 
 function App() {
   const [from, setFrom] = useState('')
   const [fromToken, setFromToken] = useState(1)
-  const [toToken, setToToken] = useState(1)
+  const [toToken, setToToken] = useState(2)
   const [to, setTo] = useState('')
-  const [dataAddress, setDataAddress] = useState({
+  const [walletData, setwalletData] = useState({
     address: '',
     balance: null,
   })
   const [submitBtnDisable, setsubmitBtnDisable] = useState(true)
-
-  const fromRef = useRef()
-  const toRef = useRef()
-
-  const connectBtnHandler = () => {
-    // Asking if metamask is already present or not
-    if (window.ethereum) {
-      // res[0] for fetching a first wallet
-      window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then((res) => setAccountData(res[0]))
-    } else {
-      alert('install metamask extension!!')
-    }
-  }
-
-  const getBalance = async (address) => {
-    return window.ethereum
-      .request({
-        method: 'eth_getBalance',
-        params: [address, 'latest'],
-      })
-      .then((balance) => {
-        return ethers.utils.formatEther(balance)
-      })
-  }
-
-  const setAccountData = async (account) => {
-    const balance = await getBalance(account)
-
-    setDataAddress({
-      address: account,
-      balance: balance,
-    })
-  }
 
   const validInputs = () => {
     return from && to && from > 0 && to > 0
@@ -95,7 +61,7 @@ function App() {
 
     const signedOrderResponse = await signOrder(
       signer,
-      dataAddress.address,
+      walletData.address,
       wethAddress,
       daiAddress,
       from,
@@ -110,17 +76,11 @@ function App() {
   return (
     <div className='App'>
       <header>
-        <WalletInfo dataAddress={dataAddress} />
-        <Button
-          onClick={connectBtnHandler}
-          className='connectButton'
-          variant='primary'
-        >
-          {dataAddress.address ? 'Connected' : 'Connect to wallet'}
-        </Button>
+        <WalletData walletData={walletData} />
+        <ConnectButton walletData={walletData} setwalletData={setwalletData} />
       </header>
       <body className='App-header'>
-        <form
+        <Form
           onSubmit={(e) => {
             handleSubmit(e)
           }}
@@ -148,7 +108,7 @@ function App() {
               Sign Order
             </Button>
           </div>
-        </form>
+        </Form>
       </body>
     </div>
   )
