@@ -5,16 +5,16 @@ import knirb from './static/knirb.png'
 import ethereum from './static/ethereum.svg'
 import dai from './static/dai.png'
 import { ethers } from 'ethers'
-import { Button, Card, Form } from 'react-bootstrap'
-import { daiAbi } from './abis/daiAbi'
+import { Button, Form } from 'react-bootstrap'
 import { signOrder } from './utils/signOrder'
+import { WalletInfo } from './components/WalletInfo'
 
 function App() {
   const [from, setFrom] = useState('')
   const [fromToken, setFromToken] = useState(1)
   const [toToken, setToToken] = useState(1)
   const [to, setTo] = useState('')
-  const [data, setData] = useState({
+  const [dataAddress, setDataAddress] = useState({
     address: '',
     balance: null,
   })
@@ -49,7 +49,7 @@ function App() {
   const setAccountData = async (account) => {
     const balance = await getBalance(account)
 
-    setData({
+    setDataAddress({
       address: account,
       balance: balance,
     })
@@ -94,49 +94,40 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // const daiAddress = '0xf2edF1c091f683E3fb452497d9a98A49cBA84666'
-
     const provider = new ethers.providers.Web3Provider(window.ethereum)
 
+    await provider.send('eth_requestAccounts', [])
+
     const signer = provider.getSigner()
-
-    // const daiContract2 = new ethers.Contract(daiAddress, daiAbi, signer)
-
-    // const dai = ethers.utils.parseUnits('1.0', 18)
-
-    // daiContract2.approve('0x9feA6464A1C2ff2B8244014C3E7791fA4734977F', dai)
-
-    //from in
-
-    // to out
 
     const wethAddress = '0x8B7FB00ABb67ba04CE894B9E2769fe24A8409a6a'
     const daiAddress = '0xf2edF1c091f683E3fb452497d9a98A49cBA84666'
 
-    signOrder(signer, wethAddress, daiAddress, 1, 10)
+    // console.log({ signer })
+
+    const { signedMessage, data } = await signOrder(
+      signer,
+      dataAddress.address,
+      wethAddress,
+      daiAddress,
+      1,
+      10
+    )
+    if (signedMessage && data) {
+      alert('order signed!')
+    }
   }
 
   return (
     <div className='App'>
       <header>
-        <Card className='account-data-card'>
-          <Card.Header>
-            <strong>Address: </strong>
-            {data.address}
-          </Card.Header>
-          <Card.Body>
-            <Card.Text>
-              <strong>Balance: </strong>
-              {data.balance}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+        <WalletInfo dataAddress={dataAddress} />
         <Button
           onClick={connectBtnHandler}
           className='connectButton'
           variant='primary'
         >
-          {data.address ? 'Connected' : 'Connect to wallet'}
+          {dataAddress.address ? 'Connected' : 'Connect to wallet'}
         </Button>
       </header>
       <body className='App-header'>
@@ -172,8 +163,8 @@ function App() {
 
             <div className='token-input-wrapper'>
               <Form.Select onChange={handleToTokenChange}>
-                <option value='1'>WETH</option>
                 <option value='2'>DAI</option>
+                <option value='1'>WETH</option>
               </Form.Select>
               <input
                 type='number'

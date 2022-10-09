@@ -1,18 +1,24 @@
-// const { ethers } = require('hardhat')
+const { ethers } = require('ethers')
 const brink = require('@brinkninja/sdk')
-
-const verifier = {}
-const implementation = {}
+const implementationArtifacts = require('./implementation')
+const verifierArtifacts = require('./verifier')
 
 // Call function to create new order message object
 export async function signOrder(
   signer,
+  signerAddress,
   tokenIn,
   tokenOut,
   inAmount,
   outAmount
 ) {
-  const accountSigner = brink.accountSigner(signer, 'goreli')
+  // console.log();
+
+  const implementation = new ethers.Contract(
+    implementationArtifacts.address,
+    implementationArtifacts.abi
+  )
+  const accountSigner = brink.accountSigner(signer, 'goerli')
 
   const call = {
     functionName: 'tokenToToken',
@@ -40,11 +46,12 @@ export async function signOrder(
   }
 
   const signedMessage = await accountSigner.signMetaDelegateCall(
-    verifier.address,
+    verifierArtifacts.address,
     call
   )
+
   const data = await implementation.populateTransaction.tokensToToken(
-    signer.address,
+    signerAddress,
     [tokenIn],
     tokenOut,
     [inAmount],
