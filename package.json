@@ -8,6 +8,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "assert": "^2.0.0",
+    "axios": "^1.1.2",
     "bootstrap": "^5.2.2",
     "buffer": "^6.0.3",
     "eth-sig-util": "^3.0.1",

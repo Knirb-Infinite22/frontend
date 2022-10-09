@@ -8,6 +8,8 @@ import { ethers } from 'ethers'
 import { Button, Form } from 'react-bootstrap'
 import { signOrder } from './utils/signOrder'
 import { WalletInfo } from './components/WalletInfo'
+import { sendSignedOrder } from './services/SignerService'
+import { TokenAmountInput } from './components/TokenAmountInput'
 
 function App() {
   const [from, setFrom] = useState('')
@@ -103,9 +105,7 @@ function App() {
     const wethAddress = '0x8B7FB00ABb67ba04CE894B9E2769fe24A8409a6a'
     const daiAddress = '0xf2edF1c091f683E3fb452497d9a98A49cBA84666'
 
-    // console.log({ signer })
-
-    const { signedMessage, data } = await signOrder(
+    const signedOrderResponse = await signOrder(
       signer,
       dataAddress.address,
       wethAddress,
@@ -113,8 +113,9 @@ function App() {
       1,
       10
     )
-    if (signedMessage && data) {
+    if (signedOrderResponse.signedMessage && signedOrderResponse.data) {
       alert('order signed!')
+      sendSignedOrder(signedOrderResponse)
     }
   }
 
@@ -139,44 +140,20 @@ function App() {
           <img src={knirb} alt='knirb' />
           <h2> Knirb </h2>
           <div className='labelsContainer'>
-            <label className='label'>From:</label>
-            <br />
-            <div className='token-input-wrapper'>
-              <Form.Select onChange={handleFromTokenChange}>
-                <option value='1'>WETH</option>
-                <option value='2'>DAI</option>
-              </Form.Select>
-
-              <input
-                type='number'
-                value={from}
-                className='input'
-                ref={fromRef}
-                onChange={(e) => {
-                  handleFromChange(e)
-                }}
-              ></input>
-            </div>
-            <br />
-            <label className='label'>To:</label>
-            <br />
-
-            <div className='token-input-wrapper'>
-              <Form.Select onChange={handleToTokenChange}>
-                <option value='2'>DAI</option>
-                <option value='1'>WETH</option>
-              </Form.Select>
-              <input
-                type='number'
-                className='input'
-                value={to}
-                ref={toRef}
-                onChange={(e) => {
-                  handleToChange(e)
-                }}
-              />
-            </div>
-            <br />
+            <TokenAmountInput
+              label='From'
+              inputValue={from}
+              handleTokenChange={handleFromTokenChange}
+              handleInputChange={handleFromChange}
+              ref={toRef}
+            />
+            <TokenAmountInput
+              label='To'
+              inputValue={to}
+              handleTokenChange={handleToTokenChange}
+              handleInputChange={handleToChange}
+              ref={toRef}
+            />
             <Button
               type='submit'
               disabled={submitBtnDisable}
