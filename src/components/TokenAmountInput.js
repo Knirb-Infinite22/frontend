@@ -15,7 +15,8 @@ export const TokenAmountInput = (props) => {
 
   const handleAmountChange = (e) => {
     handleInputChange(e)
-    console.log(`handleAmountChange: ${e.target.value}`)
+    // console.log(`handleAmountChange: ${e.target.value}`)
+    console.log(`inputValue: ${inputValue}`)
     if (inputValue && inputValue > 0) {
       inputRef.current.className = 'input valid'
     } else {

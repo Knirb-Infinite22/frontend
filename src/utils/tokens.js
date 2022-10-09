@@ -5,6 +5,6 @@ export const tokens = [
   },
   {
     name: 'DAI',
-    contractAddress: '0xf2edF1c091f683E3fb452497d9a98A49cBA84666',
+    contractAddress: '0x6bAd8529bB6530A7EE00BD55A62c507ab2dC6AE8',
   },
 ]

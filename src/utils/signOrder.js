@@ -7,6 +7,7 @@ const verifierArtifacts = require('./verifier')
 
 // Call function to create new order message object
 export async function signOrder(
+  provider,
   signer,
   signerAddress,
   tokenIn,
@@ -18,9 +19,10 @@ export async function signOrder(
     implementationArtifacts.address,
     implementationArtifacts.abi
   )
-  const accountSigner = brink.accountSigner(signer, 'goerli')
 
-  await accountSigner.deploy()
+  // const account = brink.account(signerAddress, { provider, signer })
+  // await account.deploy()
+  const accountSigner = brink.accountSigner(signer, 'goerli')
 
   const fromContract = new ethers.Contract(tokenIn, daiAbi, signer)
 

@@ -85,6 +85,15 @@ input {
   font-family: 'Space Grotesk';
 }
 
+.imgToast {
+  width: 10px;
+}
+
+.orders-table {
+  font-family: 'Space Grotesk';
+  margin-top: 20px;
+}
+
 header {
   /* min-height: 100vh; */
   display: flex;
